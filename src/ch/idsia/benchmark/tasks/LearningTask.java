@@ -45,49 +45,55 @@ import java.io.IOException;
 
 public class LearningTask extends BasicTask implements Task
 {
-private static final long EVALUATION_QUOTA = 100000;
-private long currentEvaluation = 0;
-public int uid;
 
-private String fileTimeStamp = "-uid-" + uid + "-" + GlobalOptions.getTimeStamp();
-private int fitnessEvaluations = 0;
+    private static final long EVALUATION_QUOTA = 100000;
+    private long currentEvaluation = 0;
+    public int uid;
 
-public LearningTask(MarioAIOptions marioAIOptions)
-{
-    super(marioAIOptions);
-}
+    private String fileTimeStamp = "-uid-" + uid + "-" + GlobalOptions.getTimeStamp();
+    private int fitnessEvaluations = 0;
 
-public void reset(MarioAIOptions marioAIOptions)
-{
-    options = marioAIOptions;
-    environment.reset(marioAIOptions);
-}
-
-public int evaluate(Agent agent)
-{
-    if (currentEvaluation++ > EVALUATION_QUOTA)
-        return 0;
-    options.setAgent(agent);
-    environment.reset(options);
-    fitnessEvaluations++; // TODO : remove either or two currentEvaluation or fitnessEvaluations
-    this.runSingleEpisode(1);
-    return this.getEvaluationInfo().computeWeightedFitness();
-}
-
-public static long getEvaluationQuota()
-{return LearningTask.EVALUATION_QUOTA;}
-
-public void dumpFitnessEvaluation(float fitness, String fileName)
-{
-    try
+    public LearningTask(MarioAIOptions marioAIOptions)
     {
-        BufferedWriter out = new BufferedWriter(new FileWriter(fileName + fileTimeStamp + ".txt", true));
-        out.write(this.fitnessEvaluations + " " + fitness + "\n");
-        out.close();
-    } catch (IOException e)
-    {
-        e.printStackTrace();
+        super(marioAIOptions);
     }
-}
+
+    public void reset(MarioAIOptions marioAIOptions)
+    {
+        options = marioAIOptions;
+        environment.reset(marioAIOptions);
+    }
+
+    public int evaluate(Agent agent)
+    {
+        if (currentEvaluation++ > EVALUATION_QUOTA)
+        {
+            return 0;
+        }
+        options.setAgent(agent);
+        environment.reset(options);
+        fitnessEvaluations++; // TODO : remove either or two currentEvaluation or fitnessEvaluations
+        this.runSingleEpisode(1);
+        return this.getEvaluationInfo().computeWeightedFitness();
+    }
+
+    public static long getEvaluationQuota()
+    {
+        return LearningTask.EVALUATION_QUOTA;
+    }
+
+    public void dumpFitnessEvaluation(float fitness, String fileName)
+    {
+        try
+        {
+            BufferedWriter out = new BufferedWriter(new FileWriter(fileName + fileTimeStamp + ".txt", true));
+            out.write(this.fitnessEvaluations + " " + fitness + "\n");
+            out.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
 
 }

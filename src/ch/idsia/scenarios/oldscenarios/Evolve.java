@@ -50,49 +50,52 @@ import java.util.List;
 
 public class Evolve
 {
-final static int generations = 100;
-final static int populationSize = 100;
 
-public static void main(String[] args)
-{
-    MarioAIOptions options = new MarioAIOptions(args);
-    List<Agent> bestAgents = new ArrayList<Agent>();
-    DecimalFormat df = new DecimalFormat("0000");
-    for (int difficulty = 0; difficulty < 11; difficulty++)
+    final static int generations = 100;
+    final static int populationSize = 100;
+
+    public static void main(String[] args)
     {
-        System.out.println("New Evolve phase with difficulty = " + difficulty + " started.");
-        Evolvable initial = new SimpleMLPAgent();
-
-        options.setLevelDifficulty(difficulty);
-        options.setAgent((Agent) initial);
-
-        options.setFPS(GlobalOptions.MaxFPS);
-        options.setVisualization(false);
-
-        Task task = new ProgressTask(options);
-        ES es = new ES(task, initial, populationSize);
-
-        for (int gen = 0; gen < generations; gen++)
+        MarioAIOptions options = new MarioAIOptions(args);
+        List<Agent> bestAgents = new ArrayList<Agent>();
+        DecimalFormat df = new DecimalFormat("0000");
+        for (int difficulty = 0; difficulty < 11; difficulty++)
         {
-            es.nextGeneration();
-            double bestResult = es.getBestFitnesses()[0];
-//                LOGGER.println("Generation " + gen + " best " + bestResult, LOGGER.VERBOSE_MODE.INFO);
-            System.out.println("Generation " + gen + " best " + bestResult);
-            options.setVisualization(gen % 5 == 0 || bestResult > 4000);
-//                options.setFPS(true);
-            Agent a = (Agent) es.getBests()[0];
-            a.setName(((Agent) initial).getName() + df.format(gen));
-//                AgentsPool.setCurrentAgent(a);
-            bestAgents.add(a);
-            double result = task.evaluate(a);
-//                LOGGER.println("trying: " + result, LOGGER.VERBOSE_MODE.INFO);
+            System.out.println("New Evolve phase with difficulty = " + difficulty + " started.");
+            Evolvable initial = new SimpleMLPAgent();
+
+            options.setLevelDifficulty(difficulty);
+            options.setAgent((Agent) initial);
+
+            options.setFPS(GlobalOptions.MaxFPS);
             options.setVisualization(false);
-//                options.setFPS(true);
-            Easy.save(es.getBests()[0], "evolved.xml");
-            if (result > 4000)
-                break; // Go to next difficulty.
+
+            Task task = new ProgressTask(options);
+            ES es = new ES(task, initial, populationSize);
+
+            for (int gen = 0; gen < generations; gen++)
+            {
+                es.nextGeneration();
+                double bestResult = es.getBestFitnesses()[0];
+                //                LOGGER.println("Generation " + gen + " best " + bestResult, LOGGER.VERBOSE_MODE.INFO);
+                System.out.println("Generation " + gen + " best " + bestResult);
+                options.setVisualization(gen % 5 == 0 || bestResult > 4000);
+                //                options.setFPS(true);
+                Agent a = (Agent) es.getBests()[0];
+                a.setName(((Agent) initial).getName() + df.format(gen));
+                //                AgentsPool.setCurrentAgent(a);
+                bestAgents.add(a);
+                double result = task.evaluate(a);
+                //                LOGGER.println("trying: " + result, LOGGER.VERBOSE_MODE.INFO);
+                options.setVisualization(false);
+                //                options.setFPS(true);
+                Easy.save(es.getBests()[0], "evolved.xml");
+                if (result > 4000)
+                {
+                    break; // Go to next difficulty.
+                }
+            }
         }
-    }
     /*//
     //
     //
@@ -113,6 +116,6 @@ public static void main(String[] args)
 
 
     LOGGER.save("log.txt");*/
-    System.exit(0);
-}
+        System.exit(0);
+    }
 }

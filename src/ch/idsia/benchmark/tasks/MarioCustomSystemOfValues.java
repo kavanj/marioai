@@ -36,20 +36,20 @@ package ch.idsia.benchmark.tasks;
 public class MarioCustomSystemOfValues extends SystemOfValues
 {
 
-public MarioCustomSystemOfValues()
-{
-    this.distance = 2;
-    this.win = 1;
-    this.mode = 500;
-    this.coins = 0;
-    this.flowerFire = 1640;
-    this.mushroom = 1650;
-    this.kills = 2;
-    this.killedByFire = 4;
-    this.killedByShell = 170;
-    this.killedByStomp = 1;
-    this.timeLeft = 1;
-    this.hiddenBlock = 24;
-}
+    public MarioCustomSystemOfValues()
+    {
+        this.distance = 2;
+        this.win = 1;
+        this.mode = 500;
+        this.coins = 0;
+        this.flowerFire = 1640;
+        this.mushroom = 1650;
+        this.kills = 2;
+        this.killedByFire = 4;
+        this.killedByShell = 170;
+        this.killedByStomp = 1;
+        this.timeLeft = 1;
+        this.hiddenBlock = 24;
+    }
 
 }

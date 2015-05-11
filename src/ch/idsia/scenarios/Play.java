@@ -48,29 +48,32 @@ import ch.idsia.tools.MarioAIOptions; /**
 
 public final class Play
 {
-/**
- * <p>An entry point of the class.</p>
- *
- * @param args input parameters for customization of the benchmark.
- * @see ch.idsia.scenarios.oldscenarios.MainRun
- * @see ch.idsia.tools.MarioAIOptions
- * @see ch.idsia.benchmark.mario.simulation.SimulationOptions
- * @since MarioAI-0.1
- */
 
-public static void main(String[] args)
-{
-    final MarioAIOptions marioAIOptions = new MarioAIOptions(args);
-    final BasicTask basicTask = new BasicTask(marioAIOptions);
-    marioAIOptions.setVisualization(true);
-//        basicTask.reset(marioAIOptions);
-    final MarioCustomSystemOfValues m = new MarioCustomSystemOfValues();
-//        basicTask.runSingleEpisode();
-    // run 1 episode with same options, each time giving output of Evaluation info.
-    // verbose = false
-    basicTask.doEpisodes(1, false, 1);
-    System.out.println("\nEvaluationInfo: \n" + basicTask.getEnvironment().getEvaluationInfoAsString());
-    System.out.println("\nCustom : \n" + basicTask.getEnvironment().getEvaluationInfo().computeWeightedFitness(m));
-    System.exit(0);
-}
+    /**
+     * <p>An entry point of the class.</p>
+     *
+     * @param args
+     *         input parameters for customization of the benchmark.
+     *
+     * @see ch.idsia.scenarios.oldscenarios.MainRun
+     * @see ch.idsia.tools.MarioAIOptions
+     * @see ch.idsia.benchmark.mario.simulation.SimulationOptions
+     * @since MarioAI-0.1
+     */
+
+    public static void main(String[] args)
+    {
+        final MarioAIOptions marioAIOptions = new MarioAIOptions(args);
+        final BasicTask basicTask = new BasicTask(marioAIOptions);
+        marioAIOptions.setVisualization(true);
+        //        basicTask.reset(marioAIOptions);
+        final MarioCustomSystemOfValues m = new MarioCustomSystemOfValues();
+        //        basicTask.runSingleEpisode();
+        // run 1 episode with same options, each time giving output of Evaluation info.
+        // verbose = false
+        basicTask.doEpisodes(1, false, 1);
+        System.out.println("\nEvaluationInfo: \n" + basicTask.getEnvironment().getEvaluationInfoAsString());
+        System.out.println("\nCustom : \n" + basicTask.getEnvironment().getEvaluationInfo().computeWeightedFitness(m));
+        System.exit(0);
+    }
 }

@@ -38,26 +38,27 @@ import ch.idsia.tools.MarioAIOptions;
  */
 public class MushroomTask extends BasicTask implements Task
 {
-private MarioCustomSystemOfValues sov = new MarioCustomSystemOfValues();
 
-public MushroomTask(MarioAIOptions marioAIOptions)
-{
-    super(marioAIOptions);
-    this.options = marioAIOptions;
-}
+    private MarioCustomSystemOfValues sov = new MarioCustomSystemOfValues();
 
-public int evaluate(Agent controller)
-{
-    float fitness = 0;
-    controller.reset();
-//        options.setLevelRandSeed(startingSeed++);
-//        System.out.println("controller = " + controller);
-    options.setAgent(controller);
-//        this.setAgent(controller);
-    this.setOptionsAndReset(options);
-    this.runSingleEpisode(1);
-    fitness += this.getEnvironment().getEvaluationInfo().computeWeightedFitness(sov);
-    return (int) fitness;
-}
+    public MushroomTask(MarioAIOptions marioAIOptions)
+    {
+        super(marioAIOptions);
+        this.options = marioAIOptions;
+    }
+
+    public int evaluate(Agent controller)
+    {
+        float fitness = 0;
+        controller.reset();
+        //        options.setLevelRandSeed(startingSeed++);
+        //        System.out.println("controller = " + controller);
+        options.setAgent(controller);
+        //        this.setAgent(controller);
+        this.setOptionsAndReset(options);
+        this.runSingleEpisode(1);
+        fitness += this.getEnvironment().getEvaluationInfo().computeWeightedFitness(sov);
+        return (int) fitness;
+    }
 
 }

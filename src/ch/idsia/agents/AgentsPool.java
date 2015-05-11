@@ -27,9 +27,6 @@
 
 package ch.idsia.agents;
 
-import ch.idsia.agents.controllers.human.HumanKeyboardAgent;
-import ch.idsia.utils.wox.serial.Easy;
-
 import java.util.*;
 
 /**
@@ -42,59 +39,64 @@ import java.util.*;
 
 public final class AgentsPool
 {
-private static Agent currentAgent = null;
-private static AgentLoader agentLoader = AgentLoader.getInstance();
 
-public static void addAgent(Agent agent)
-{
-    agentsHashMap.put(agent.getName(), agent);
-}
+    private static Agent currentAgent = null;
+    private static AgentLoader agentLoader = AgentLoader.getInstance();
 
-public static void addAgent(String agentWOXName, boolean isPunj) throws IllegalFormatException
-{
-    addAgent(loadAgent(agentWOXName, isPunj));
-}
+    public static void addAgent(Agent agent)
+    {
+        agentsHashMap.put(agent.getName(), agent);
+    }
 
-public static Agent loadAgent(String name, boolean isPunj)
-{
-    return agentLoader.loadAgent(name, isPunj);
-}
+    public static void addAgent(String agentWOXName, boolean isPunj) throws IllegalFormatException
+    {
+        addAgent(loadAgent(agentWOXName, isPunj));
+    }
 
-public static Collection<Agent> getAgentsCollection()
-{
-    return agentsHashMap.values();
-}
+    public static Agent loadAgent(String name, boolean isPunj)
+    {
+        return agentLoader.loadAgent(name, isPunj);
+    }
 
-public static Set<String> getAgentsNames()
-{
-    return AgentsPool.agentsHashMap.keySet();
-}
+    public static Collection<Agent> getAgentsCollection()
+    {
+        return agentsHashMap.values();
+    }
 
-public static Agent getAgentByName(String agentName)
-{
-    // There is only one case possible;
-    Agent ret = AgentsPool.agentsHashMap.get(agentName);
-    if (ret == null)
-        ret = AgentsPool.agentsHashMap.get(agentName.split(":")[0]);
-    return ret;
-}
+    public static Set<String> getAgentsNames()
+    {
+        return AgentsPool.agentsHashMap.keySet();
+    }
 
-public static Agent getCurrentAgent()
-{
-    if (currentAgent == null)
-        currentAgent = (Agent) getAgentsCollection().toArray()[0];
-    return currentAgent;
-}
+    public static Agent getAgentByName(String agentName)
+    {
+        // There is only one case possible;
+        Agent ret = AgentsPool.agentsHashMap.get(agentName);
+        if (ret == null)
+        {
+            ret = AgentsPool.agentsHashMap.get(agentName.split(":")[0]);
+        }
+        return ret;
+    }
 
-public static void setCurrentAgent(Agent agent)
-{
-    currentAgent = agent;
-}
+    public static Agent getCurrentAgent()
+    {
+        if (currentAgent == null)
+        {
+            currentAgent = (Agent) getAgentsCollection().toArray()[0];
+        }
+        return currentAgent;
+    }
 
-//public static void setCurrentAgent(String agentWOXName)
-//{
-//    setCurrentAgent(AgentsPool.loadAgent(agentWOXName));
-//}
+    public static void setCurrentAgent(Agent agent)
+    {
+        currentAgent = agent;
+    }
 
-static HashMap<String, Agent> agentsHashMap = new LinkedHashMap<String, Agent>();
+    //public static void setCurrentAgent(String agentWOXName)
+    //{
+    //    setCurrentAgent(AgentsPool.loadAgent(agentWOXName));
+    //}
+
+    static HashMap<String, Agent> agentsHashMap = new LinkedHashMap<String, Agent>();
 }

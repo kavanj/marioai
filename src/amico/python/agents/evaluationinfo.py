@@ -1,11 +1,13 @@
-__author__="Sergey Karakovskiy"
-__date__ ="$Mar 18, 2010 10:48:28 PM$"
+__author__ = "Sergey Karakovskiy"
+__date__ = "$Mar 18, 2010 10:48:28 PM$"
+
 
 class Inspectable(object):
     """ All derived classes gains the ability to print the names and values of all their fields"""
+
     def __repr__(self):
         return '<%s: %s>' % (self.__class__.__name__,
-            dict([(x,y) for (x,y) in self.__dict__.items() if not x.startswith('_')]) )
+                             dict([(x, y) for (x, y) in self.__dict__.items() if not x.startswith('_')]))
 
 
 class EvaluationInfo(Inspectable):
@@ -15,7 +17,7 @@ class EvaluationInfo(Inspectable):
         print "flowersDevoured = ", evInfo[2]
         print "killsByFire = ", evInfo[3]
         print "killsByShell = ", evInfo[4]
-        print "killsByStomp = ",  evInfo[5]
+        print "killsByStomp = ", evInfo[5]
         print "killsTotal = ", evInfo[6]
         print "marioMode = ", evInfo[7]
         print "marioStatus = ", evInfo[8]

@@ -38,17 +38,18 @@ import ch.idsia.benchmark.tasks.LearningTask;
 
 public interface LearningAgent extends Agent
 {
-public void learn();
 
-public void giveReward(float reward);
+    public void learn();
 
-public void newEpisode();
+    public void giveReward(float reward);
 
-public void setLearningTask(LearningTask learningTask);
+    public void newEpisode();
 
-public void setEvaluationQuota(long num);
+    public void setLearningTask(LearningTask learningTask);
 
-public Agent getBestAgent();
+    public void setEvaluationQuota(long num);
 
-public void init(); // TODO: remove it as redundant
+    public Agent getBestAgent();
+
+    public void init(); // TODO: remove it as redundant
 }

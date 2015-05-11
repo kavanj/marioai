@@ -40,28 +40,37 @@ import ch.idsia.benchmark.mario.engine.sprites.Mario;
  */
 public class SergeyKarakovskiy_JumpingAgent extends BasicMarioAIAgent implements Agent
 {
-public SergeyKarakovskiy_JumpingAgent()
-{
-    super("SergeyKarakovskiy_JumpingAgent");
-    reset();
-}
 
-public boolean[] getAction()
-{
-    action[Mario.KEY_SPEED] = action[Mario.KEY_JUMP] = isMarioAbleToJump || !isMarioOnGround;
-    return action;
-}
+    public SergeyKarakovskiy_JumpingAgent()
+    {
+        super("SergeyKarakovskiy_JumpingAgent");
+        reset();
+    }
 
-@Override
-public void reset()
-{
-    for (int i = 0; i < action.length; ++i)
-        action[i] = false;
-    action[Mario.KEY_RIGHT] = true;
-    action[Mario.KEY_SPEED] = true;
-}
+    public boolean[] getAction()
+    {
+        action[Mario.KEY_SPEED] = action[Mario.KEY_JUMP] = isMarioAbleToJump || !isMarioOnGround;
+        return action;
+    }
 
-public String getName() { return name; }
+    @Override
+    public void reset()
+    {
+        for (int i = 0; i < action.length; ++i)
+        {
+            action[i] = false;
+        }
+        action[Mario.KEY_RIGHT] = true;
+        action[Mario.KEY_SPEED] = true;
+    }
 
-public void setName(String Name) { this.name = Name; }
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String Name)
+    {
+        this.name = Name;
+    }
 }

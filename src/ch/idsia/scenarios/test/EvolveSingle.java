@@ -44,30 +44,31 @@ import ch.idsia.utils.wox.serial.Easy;
  */
 public class EvolveSingle
 {
-final static int generations = 100;
-final static int populationSize = 100;
 
-public static void main(String[] args)
-{
-    MarioAIOptions options = new MarioAIOptions(new String[0]);
-//        options.setEvaluationQuota(1);
-    Evolvable initial = new SimpleMLPAgent();
-//        RegisterableAgent.registerAgent ((Agent) initial);
-    options.setFPS(GlobalOptions.MaxFPS);
-    options.setLevelDifficulty(0);
-    options.setVisualization(false);
-    ProgressTask task = new ProgressTask(options);
-    options.setLevelRandSeed((int) (Math.random() * Integer.MAX_VALUE));
-    ES es = new ES(task, initial, populationSize);
-    System.out.println("Evolving " + initial + " with task " + task);
-    final String fileName = "evolved" + (int) (Math.random() * Integer.MAX_VALUE) + ".xml";
-    for (int gen = 0; gen < generations; gen++)
+    final static int generations = 100;
+    final static int populationSize = 100;
+
+    public static void main(String[] args)
     {
-        es.nextGeneration();
-        double bestResult = es.getBestFitnesses()[0];
-        System.out.println("Generation " + gen + " best " + bestResult);
-        Easy.save(es.getBests()[0], fileName);
+        MarioAIOptions options = new MarioAIOptions(new String[0]);
+        //        options.setEvaluationQuota(1);
+        Evolvable initial = new SimpleMLPAgent();
+        //        RegisterableAgent.registerAgent ((Agent) initial);
+        options.setFPS(GlobalOptions.MaxFPS);
+        options.setLevelDifficulty(0);
+        options.setVisualization(false);
+        ProgressTask task = new ProgressTask(options);
+        options.setLevelRandSeed((int) (Math.random() * Integer.MAX_VALUE));
+        ES es = new ES(task, initial, populationSize);
+        System.out.println("Evolving " + initial + " with task " + task);
+        final String fileName = "evolved" + (int) (Math.random() * Integer.MAX_VALUE) + ".xml";
+        for (int gen = 0; gen < generations; gen++)
+        {
+            es.nextGeneration();
+            double bestResult = es.getBestFitnesses()[0];
+            System.out.println("Generation " + gen + " best " + bestResult);
+            Easy.save(es.getBests()[0], fileName);
+        }
+        Stats.main(new String[]{fileName, "1"});
     }
-    Stats.main(new String[]{fileName, "1"});
-}
 }

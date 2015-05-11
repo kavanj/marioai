@@ -46,116 +46,135 @@ import java.util.zip.ZipFile;
  */
 public class Replayer
 {
-private ZipFile zf = null;
-private ZipEntry ze = null;
-private BufferedInputStream fis;
-private ReplayerOptions options;
 
-public Replayer(String replayOptions)
-{
-    this.options = new ReplayerOptions(replayOptions);
-}
+    private ZipFile zf = null;
+    private ZipEntry ze = null;
+    private BufferedInputStream fis;
+    private ReplayerOptions options;
 
-public boolean openNextReplayFile() throws IOException
-{
-//    if (zf != null)
-//        zf.close();
-
-    String fileName = options.getNextReplayFile();
-    if (fileName == null)
-        return false;
-
-    if (!fileName.endsWith(".zip"))
-        fileName += ".zip";
-
-    zf = new ZipFile(fileName);
-    ze = null;
-    fis = null;
-
-    try
+    public Replayer(String replayOptions)
     {
-        openFile("chunks");
-        options.setChunks((Queue) readObject());
-    } catch (Exception ignored)
-    {} //if file with replay chunks not found, than use user specified chunks
-
-    return true;
-}
-
-public void openFile(String filename) throws Exception
-{
-    ze = zf.getEntry(filename);
-
-    if (ze == null)
-        throw new Exception("[Mario AI EXCEPTION] : File <" + filename + "> not found in the archive");
-}
-
-private void openBufferedInputStream() throws IOException
-{
-    fis = new BufferedInputStream(zf.getInputStream(ze));
-}
-
-public boolean[] readAction() throws IOException
-{
-    if (fis == null)
-        openBufferedInputStream();
-
-    boolean[] buffer = new boolean[Environment.numberOfKeys];
-//    int count = fis.read(buffer, 0, size);
-    byte actions = (byte) fis.read();
-    for (int i = 0; i < Environment.numberOfKeys; i++)
-    {
-        if ((actions & (1 << i)) > 0)
-            buffer[i] = true;
-        else
-            buffer[i] = false;
+        this.options = new ReplayerOptions(replayOptions);
     }
 
-    if (actions == -1)
-        buffer = null;
+    public boolean openNextReplayFile() throws IOException
+    {
+        //    if (zf != null)
+        //        zf.close();
 
-    return buffer;
-}
+        String fileName = options.getNextReplayFile();
+        if (fileName == null)
+        {
+            return false;
+        }
 
-public Object readObject() throws IOException, ClassNotFoundException
-{
-    ObjectInputStream ois = new ObjectInputStream(zf.getInputStream(ze));
-    Object res = ois.readObject();
-//    ois.close();
+        if (!fileName.endsWith(".zip"))
+        {
+            fileName += ".zip";
+        }
 
-    return res;
-}
+        zf = new ZipFile(fileName);
+        ze = null;
+        fis = null;
 
-public void closeFile() throws IOException
-{
-//    fis.close();
-}
+        try
+        {
+            openFile("chunks");
+            options.setChunks((Queue) readObject());
+        }
+        catch (Exception ignored)
+        {
+        } //if file with replay chunks not found, than use user specified chunks
 
-public void closeReplayFile() throws IOException
-{
-    zf.close();
-}
+        return true;
+    }
 
-public boolean hasMoreChunks()
-{
-    return options.hasMoreChunks();
-}
+    public void openFile(String filename) throws Exception
+    {
+        ze = zf.getEntry(filename);
 
-public int actionsFileSize()
-{
-    int size = (int) ze.getSize();
-    if (size == -1)
-        size = Integer.MAX_VALUE;
-    return size;
-}
+        if (ze == null)
+        {
+            throw new Exception("[Mario AI EXCEPTION] : File <" + filename + "> not found in the archive");
+        }
+    }
 
-public ReplayerOptions.Interval getNextIntervalInMarioseconds()
-{
-    return options.getNextIntervalInMarioseconds();
-}
+    private void openBufferedInputStream() throws IOException
+    {
+        fis = new BufferedInputStream(zf.getInputStream(ze));
+    }
 
-public ReplayerOptions.Interval getNextIntervalInTicks()
-{
-    return options.getNextIntervalInTicks();
-}
+    public boolean[] readAction() throws IOException
+    {
+        if (fis == null)
+        {
+            openBufferedInputStream();
+        }
+
+        boolean[] buffer = new boolean[Environment.numberOfKeys];
+        //    int count = fis.read(buffer, 0, size);
+        byte actions = (byte) fis.read();
+        for (int i = 0; i < Environment.numberOfKeys; i++)
+        {
+            if ((actions & (1 << i)) > 0)
+            {
+                buffer[i] = true;
+            }
+            else
+            {
+                buffer[i] = false;
+            }
+        }
+
+        if (actions == -1)
+        {
+            buffer = null;
+        }
+
+        return buffer;
+    }
+
+    public Object readObject() throws IOException, ClassNotFoundException
+    {
+        ObjectInputStream ois = new ObjectInputStream(zf.getInputStream(ze));
+        Object res = ois.readObject();
+        //    ois.close();
+
+        return res;
+    }
+
+    public void closeFile() throws IOException
+    {
+        //    fis.close();
+    }
+
+    public void closeReplayFile() throws IOException
+    {
+        zf.close();
+    }
+
+    public boolean hasMoreChunks()
+    {
+        return options.hasMoreChunks();
+    }
+
+    public int actionsFileSize()
+    {
+        int size = (int) ze.getSize();
+        if (size == -1)
+        {
+            size = Integer.MAX_VALUE;
+        }
+        return size;
+    }
+
+    public ReplayerOptions.Interval getNextIntervalInMarioseconds()
+    {
+        return options.getNextIntervalInMarioseconds();
+    }
+
+    public ReplayerOptions.Interval getNextIntervalInTicks()
+    {
+        return options.getNextIntervalInTicks();
+    }
 }

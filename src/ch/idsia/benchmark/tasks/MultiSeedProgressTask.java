@@ -39,67 +39,68 @@ import ch.idsia.tools.MarioAIOptions;
 
 public class MultiSeedProgressTask extends BasicTask implements Task
 {
-private MarioAIOptions options;
-private int startingSeed = 0;
-private int numberOfSeeds = 3;
 
-public MultiSeedProgressTask(MarioAIOptions evaluationOptions)
-{
-    super(evaluationOptions);
-    setOptionsAndReset(evaluationOptions);
-}
+    private MarioAIOptions options;
+    private int startingSeed = 0;
+    private int numberOfSeeds = 3;
 
-public int evaluate(Agent controller)
-{
-    float distanceTravelled = 0;
-
-    options.setAgent(controller);
-//        this.setAgent(controller);
-
-    for (int i = 0; i < numberOfSeeds; i++)
+    public MultiSeedProgressTask(MarioAIOptions evaluationOptions)
     {
-        controller.reset();
-        options.setLevelRandSeed(startingSeed + i);
-//        this.reset(options);
-        this.runSingleEpisode(1);
-        distanceTravelled += this.getEnvironment().getEvaluationInfo().computeDistancePassed();
+        super(evaluationOptions);
+        setOptionsAndReset(evaluationOptions);
     }
-    distanceTravelled = distanceTravelled / numberOfSeeds;
-    return (int) distanceTravelled;
-}
 
-public void setStartingSeed(int seed)
-{
-    startingSeed = seed;
-}
+    public int evaluate(Agent controller)
+    {
+        float distanceTravelled = 0;
 
-public void setNumberOfSeeds(int number)
-{
-    numberOfSeeds = number;
-}
+        options.setAgent(controller);
+        //        this.setAgent(controller);
 
-public void setOptionsAndReset(MarioAIOptions options)
-{
-    this.options = options;
-}
+        for (int i = 0; i < numberOfSeeds; i++)
+        {
+            controller.reset();
+            options.setLevelRandSeed(startingSeed + i);
+            //        this.reset(options);
+            this.runSingleEpisode(1);
+            distanceTravelled += this.getEnvironment().getEvaluationInfo().computeDistancePassed();
+        }
+        distanceTravelled = distanceTravelled / numberOfSeeds;
+        return (int) distanceTravelled;
+    }
 
-public MarioAIOptions getOptions()
-{
-    return options;
-}
+    public void setStartingSeed(int seed)
+    {
+        startingSeed = seed;
+    }
 
-public void doEpisodes(int amount, boolean verbose, final int repetitionsOfSingleEpisode)
-{
+    public void setNumberOfSeeds(int number)
+    {
+        numberOfSeeds = number;
+    }
 
-}
+    public void setOptionsAndReset(MarioAIOptions options)
+    {
+        this.options = options;
+    }
 
-public boolean isFinished()
-{
-    return true;
-}
+    public MarioAIOptions getOptions()
+    {
+        return options;
+    }
 
-public void reset()
-{
+    public void doEpisodes(int amount, boolean verbose, final int repetitionsOfSingleEpisode)
+    {
 
-}
+    }
+
+    public boolean isFinished()
+    {
+        return true;
+    }
+
+    public void reset()
+    {
+
+    }
 }

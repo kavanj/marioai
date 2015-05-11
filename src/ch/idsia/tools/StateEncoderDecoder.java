@@ -36,12 +36,12 @@ package ch.idsia.tools;
  */
 public class StateEncoderDecoder
 {
-//    public static String Encode(byte[][] raw_observation) {
-//
-//    }
-//
-//    public static byte[][] Decode(String encoded_obs) {
-//
-//    }
+    //    public static String Encode(byte[][] raw_observation) {
+    //
+    //    }
+    //
+    //    public static byte[][] Decode(String encoded_obs) {
+    //
+    //    }
 
 }

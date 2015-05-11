@@ -36,30 +36,31 @@ import ch.idsia.tools.MarioAIOptions;
  */
 public final class Main
 {
-public static void main(String[] args)
-{
-//        final String argsString = "-vis on";
-    final MarioAIOptions marioAIOptions = new MarioAIOptions(args);
-//        final Environment environment = new MarioEnvironment();
-//        final Agent agent = new ForwardAgent();
-//        final Agent agent = marioAIOptions.getAgent();
-//        final Agent a = AgentsPool.loadAgent("ch.idsia.controllers.agents.controllers.ForwardJumpingAgent");
-    final BasicTask basicTask = new BasicTask(marioAIOptions);
-//        for (int i = 0; i < 10; ++i)
-//        {
-//            int seed = 0;
-//            do
-//            {
-//                marioAIOptions.setLevelDifficulty(i);
-//                marioAIOptions.setLevelRandSeed(seed++);
-    basicTask.setOptionsAndReset(marioAIOptions);
-//    basicTask.runSingleEpisode(1);
-    basicTask.doEpisodes(1,true,1);
-//    System.out.println(basicTask.getEnvironment().getEvaluationInfoAsString());
-//            } while (basicTask.getEnvironment().getEvaluationInfo().marioStatus != Environment.MARIO_STATUS_WIN);
-//        }
-//
-    System.exit(0);
-}
+
+    public static void main(String[] args)
+    {
+        //        final String argsString = "-vis on";
+        final MarioAIOptions marioAIOptions = new MarioAIOptions(args);
+        //        final Environment environment = new MarioEnvironment();
+        //        final Agent agent = new ForwardAgent();
+        //        final Agent agent = marioAIOptions.getAgent();
+        //        final Agent a = AgentsPool.loadAgent("ch.idsia.controllers.agents.controllers.ForwardJumpingAgent");
+        final BasicTask basicTask = new BasicTask(marioAIOptions);
+        //        for (int i = 0; i < 10; ++i)
+        //        {
+        //            int seed = 0;
+        //            do
+        //            {das
+        //                marioAIOptions.setLevelDifficulty(i);
+        //                marioAIOptions.setLevelRandSeed(seed++);
+        basicTask.setOptionsAndReset(marioAIOptions);
+        //    basicTask.runSingleEpisode(1);
+        basicTask.doEpisodes(1, true, 1);
+        //    System.out.println(basicTask.getEnvironment().getEvaluationInfoAsString());
+        //            } while (basicTask.getEnvironment().getEvaluationInfo().marioStatus != Environment.MARIO_STATUS_WIN);
+        //        }
+        //
+        System.exit(0);
+    }
 
 }

@@ -45,37 +45,40 @@ import java.io.InputStream;
  */
 public class Easy
 {
-public static void save(Object ob, String filename)
-{
-    try
-    {
-        ObjectWriter writer = new SimpleWriter();
-        Element el = writer.write(ob);
-        XMLOutputter out = new XMLOutputter(); // ("  ", true);
-        FileWriter file = new FileWriter(filename);
-        out.output(el, file);
-        file.close();
-        System.out.println("Saved object to " + filename);
-    } catch (Exception e)
-    {
-        e.printStackTrace();
-    }
-}
 
-public static Object load(String filename)
-{
-    try
+    public static void save(Object ob, String filename)
     {
-        SAXBuilder builder = new SAXBuilder();
-        InputStream is = new FileInputStream(filename);
-        Document doc = builder.build(is);
-        Element el = doc.getRootElement();
-        ObjectReader reader = new SimpleReader();
-        return reader.read(el);
-    } catch (Exception e)
-    {
-        System.err.println("Easy: cannot find wox definition with name " + filename);
-        return null;
+        try
+        {
+            ObjectWriter writer = new SimpleWriter();
+            Element el = writer.write(ob);
+            XMLOutputter out = new XMLOutputter(); // ("  ", true);
+            FileWriter file = new FileWriter(filename);
+            out.output(el, file);
+            file.close();
+            System.out.println("Saved object to " + filename);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
-}
+
+    public static Object load(String filename)
+    {
+        try
+        {
+            SAXBuilder builder = new SAXBuilder();
+            InputStream is = new FileInputStream(filename);
+            Document doc = builder.build(is);
+            Element el = doc.getRootElement();
+            ObjectReader reader = new SimpleReader();
+            return reader.read(el);
+        }
+        catch (Exception e)
+        {
+            System.err.println("Easy: cannot find wox definition with name " + filename);
+            return null;
+        }
+    }
 }

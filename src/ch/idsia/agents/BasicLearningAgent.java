@@ -40,51 +40,52 @@ import ch.idsia.benchmark.tasks.LearningTask;
  */
 public class BasicLearningAgent extends SimpleMLPAgent implements LearningAgent
 {
-Agent agent;
-Agent finalAgent;
 
-public BasicLearningAgent(Agent agent)
-{
-    this.agent = agent;
-}
+    Agent agent;
+    Agent finalAgent;
 
-public BasicLearningAgent()
-{
-    this.agent = new SmallMLPAgent();
-}
+    public BasicLearningAgent(Agent agent)
+    {
+        this.agent = agent;
+    }
 
-public void learn()
-{
+    public BasicLearningAgent()
+    {
+        this.agent = new SmallMLPAgent();
+    }
 
-}
+    public void learn()
+    {
 
-public void giveReward(float r)
-{
+    }
 
-}
+    public void giveReward(float r)
+    {
 
-public void newEpisode()
-{
+    }
 
-}
+    public void newEpisode()
+    {
 
-public Agent getBestAgent()
-{
-    return null;
-}
+    }
 
-public void setEvaluationQuota(long num)
-{
+    public Agent getBestAgent()
+    {
+        return null;
+    }
 
-}
+    public void setEvaluationQuota(long num)
+    {
 
-public void setLearningTask(LearningTask task)
-{
+    }
 
-}
+    public void setLearningTask(LearningTask task)
+    {
 
-public void init()
-{
+    }
 
-}
+    public void init()
+    {
+
+    }
 }

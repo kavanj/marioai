@@ -40,19 +40,20 @@ import ch.idsia.tools.MarioAIOptions;
 
 public interface Task
 {
-public int evaluate(final Agent controller);
 
-public void setOptionsAndReset(final MarioAIOptions options);
+    public int evaluate(final Agent controller);
 
-public void setOptionsAndReset(final String options);
+    public void setOptionsAndReset(final MarioAIOptions options);
 
-void reset();
+    public void setOptionsAndReset(final String options);
 
-void doEpisodes(final int amount, final boolean verbose, final int repetitionsOfSingleEpisode);
+    void reset();
 
-boolean isFinished();
+    void doEpisodes(final int amount, final boolean verbose, final int repetitionsOfSingleEpisode);
 
-public String getName();
+    boolean isFinished();
 
-public void printStatistics();
+    public String getName();
+
+    public void printStatistics();
 }

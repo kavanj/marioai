@@ -42,14 +42,15 @@ import ch.idsia.tools.MarioAIOptions;
  */
 public class GeneralScenario
 {
-public static void main(String[] args)
-{
-//        Agent agent = new ForwardAgent();
-    MarioAIOptions options = new MarioAIOptions(args);
-    Task task = new ProgressTask(options);
-    Experiment exp = new EpisodicExperiment(task, options.getAgent());
-    exp.doEpisodes(2);
-}
+
+    public static void main(String[] args)
+    {
+        //        Agent agent = new ForwardAgent();
+        MarioAIOptions options = new MarioAIOptions(args);
+        Task task = new ProgressTask(options);
+        Experiment exp = new EpisodicExperiment(task, options.getAgent());
+        exp.doEpisodes(2);
+    }
 
 /*
         MarioAIOptions options = new MarioAIOptions(args);

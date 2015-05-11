@@ -41,14 +41,14 @@ import ch.idsia.scenarios.oldscenarios.Stats;
 public class StatsJLink
 {
 
-public void evaluateLargeSRN(double[][] inputs, double[][] recurrent, double[][] output, int level)
-{
-    // 98 * 6
-    // 6*6
-    // 6*6
-    SRN srn = new SRN(inputs, recurrent, output, recurrent.length, output[0].length);
-    Agent agent = new LargeSRNAgent(srn);
-    Stats.doStats(agent, 0);
-}
+    public void evaluateLargeSRN(double[][] inputs, double[][] recurrent, double[][] output, int level)
+    {
+        // 98 * 6
+        // 6*6
+        // 6*6
+        SRN srn = new SRN(inputs, recurrent, output, recurrent.length, output[0].length);
+        Agent agent = new LargeSRNAgent(srn);
+        Stats.doStats(agent, 0);
+    }
 
 }

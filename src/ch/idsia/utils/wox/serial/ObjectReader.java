@@ -38,5 +38,6 @@ import org.jdom.Element;
  */
 public interface ObjectReader extends Serial
 {
-public Object read(Element xob);
+
+    public Object read(Element xob);
 }

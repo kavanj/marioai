@@ -1,8 +1,9 @@
-__author__="Sergey Karakovskiy, sergey at idsia fullstop ch"
-__date__ ="$Feb 18, 2009 1:01:12 AM$"
+__author__ = "Sergey Karakovskiy, sergey at idsia fullstop ch"
+__date__ = "$Feb 18, 2009 1:01:12 AM$"
+
 
 class SimplePyAgent:
-#    class MarioAgent(Agent):
+    #    class MarioAgent(Agent):
     """ example of usage of AmiCo
     """
 

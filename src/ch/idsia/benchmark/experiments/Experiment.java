@@ -41,46 +41,47 @@ import java.util.List;
  */
 public class Experiment
 {
-public Task task;
-public Agent agent;
-public int stepNumber;
-// An experiment matches up a task with an agent and handles their interactions.
+
+    public Task task;
+    public Agent agent;
+    public int stepNumber;
+    // An experiment matches up a task with an agent and handles their interactions.
 
 
-public Experiment(Task task, Agent agent)
-{
-    this.task = task;
-    this.agent = agent;
-    this.stepNumber = 0;
-}
-
-public void doInteractions(int number)
-{
-    // The default implementation directly maps the methods of the agent and the task.
-//        Returns the number of interactions done.
-    for (int i = 0; i < number; ++i)
+    public Experiment(Task task, Agent agent)
     {
-        this.oneInteraction();
+        this.task = task;
+        this.agent = agent;
+        this.stepNumber = 0;
     }
-}
 
-public double oneInteraction()
-{
-    ++this.stepNumber;
-//        self.agent.integrateObservation(self.task.getObservation())
-//        self.task.performAction(self.agent.getAction())
-//        reward = self.task.getReward()
-//        self.agent.giveReward(reward)
-    double reward = 0;
-    return reward;
-}
-
-public List<List<Double>> doEpisodes(int amount)
-{
-    for (int i = 0; i < amount; ++i)
+    public void doInteractions(int number)
     {
-        this.oneInteraction();
+        // The default implementation directly maps the methods of the agent and the task.
+        //        Returns the number of interactions done.
+        for (int i = 0; i < number; ++i)
+        {
+            this.oneInteraction();
+        }
     }
-    return null;
-}
+
+    public double oneInteraction()
+    {
+        ++this.stepNumber;
+        //        self.agent.integrateObservation(self.task.getObservation())
+        //        self.task.performAction(self.agent.getAction())
+        //        reward = self.task.getReward()
+        //        self.agent.giveReward(reward)
+        double reward = 0;
+        return reward;
+    }
+
+    public List<List<Double>> doEpisodes(int amount)
+    {
+        for (int i = 0; i < amount; ++i)
+        {
+            this.oneInteraction();
+        }
+        return null;
+    }
 }

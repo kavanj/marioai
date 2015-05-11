@@ -42,32 +42,33 @@ import java.util.List;
  */
 public class EpisodicExperiment extends Experiment
 {
-public EpisodicExperiment(Task task, Agent agent)
-{
-    super(task, agent);
-}
 
-// returns the rewards of each step as an array of doubles
-
-public List<List<Double>> doEpisodes(int amount)
-{
-    List<List<Double>> allRewards = new ArrayList<List<Double>>();
-    for (int i = 0; i < amount; ++i)
+    public EpisodicExperiment(Task task, Agent agent)
     {
-        List<Double> rewards = new ArrayList<Double>();
-        this.stepNumber = 0;
-        // the agent is informed of the start of the episode
-//            this.agent.newEpisode();
-        this.agent.reset();
-        this.task.reset();
-        while (!this.task.isFinished())
-        {
-            Double r = this.oneInteraction();
-            rewards.add(r);
-        }
-        allRewards.add(rewards);
+        super(task, agent);
     }
-    return allRewards;
-}
+
+    // returns the rewards of each step as an array of doubles
+
+    public List<List<Double>> doEpisodes(int amount)
+    {
+        List<List<Double>> allRewards = new ArrayList<List<Double>>();
+        for (int i = 0; i < amount; ++i)
+        {
+            List<Double> rewards = new ArrayList<Double>();
+            this.stepNumber = 0;
+            // the agent is informed of the start of the episode
+            //            this.agent.newEpisode();
+            this.agent.reset();
+            this.task.reset();
+            while (!this.task.isFinished())
+            {
+                Double r = this.oneInteraction();
+                rewards.add(r);
+            }
+            allRewards.add(rewards);
+        }
+        return allRewards;
+    }
 
 }

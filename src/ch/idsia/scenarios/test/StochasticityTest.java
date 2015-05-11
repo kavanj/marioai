@@ -41,20 +41,21 @@ import ch.idsia.tools.MarioAIOptions;
  */
 public class StochasticityTest
 {
-final static int repetitions = 10;
 
-public static void main(String[] args)
-{
-    Agent controller = AgentsPool.loadAgent(args[0], false);
-    MarioAIOptions options = new MarioAIOptions(new String[0]);
-    options.setAgent(controller);
-    Task task = new ProgressTask(options);
-    options.setVisualization(false);
-    task.setOptionsAndReset(options);
-    for (int i = 0; i < repetitions; i++)
+    final static int repetitions = 10;
+
+    public static void main(String[] args)
     {
-        System.out.println("Score: " + task.evaluate(controller));
+        Agent controller = AgentsPool.loadAgent(args[0], false);
+        MarioAIOptions options = new MarioAIOptions(new String[0]);
+        options.setAgent(controller);
+        Task task = new ProgressTask(options);
+        options.setVisualization(false);
+        task.setOptionsAndReset(options);
+        for (int i = 0; i < repetitions; i++)
+        {
+            System.out.println("Score: " + task.evaluate(controller));
+        }
     }
-}
 
 }

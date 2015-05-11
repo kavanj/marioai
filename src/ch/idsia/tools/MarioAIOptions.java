@@ -57,308 +57,331 @@ import java.util.Map;
 
 public final class MarioAIOptions extends SimulationOptions
 {
-private static final HashMap<String, MarioAIOptions> CmdLineOptionsMapString = new HashMap<String, MarioAIOptions>();
-private String optionsAsString = "";
 
-final private Point marioInitialPos = new Point();
+    private static final HashMap<String, MarioAIOptions> CmdLineOptionsMapString = new HashMap<String, MarioAIOptions>();
+    private String optionsAsString = "";
 
-public MarioAIOptions(String[] args)
-{
-    super();
-    this.setArgs(args);
-}
+    final private Point marioInitialPos = new Point();
 
-//    @Deprecated
-
-public MarioAIOptions(String args)
-{
-    //USE MarioAIOptions.getCmdLineOptionsClassByString(String args) method
-    super();
-    this.setArgs(args);
-}
-
-public MarioAIOptions()
-{
-    super();
-    this.setArgs("");
-}
-
-public void setArgs(String argString)
-{
-    if (!"".equals(argString))
-        this.setArgs(argString.trim().split("\\s+"));
-    else
-        this.setArgs((String[]) null);
-}
-
-public String asString()
-{
-    return optionsAsString;
-}
-
-public void setArgs(String[] args)
-{
-//        if (args.length > 0 && !args[0].startsWith("-") /*starts with a path to agent then*/)
-//        {
-//            this.setAgent(args[0]);
-//
-//            String[] shiftedargs = new String[args.length - 1];
-//            System.arraycopy(args, 1, shiftedargs, 0, args.length - 1);
-//            this.setUpOptions(shiftedargs);
-//        }
-//        else
-    if (args != null)
-        for (String s : args)
-            optionsAsString += s + " ";
-
-    this.setUpOptions(args);
-
-     if (isEcho())
+    public MarioAIOptions(String[] args)
     {
-        this.printOptions(false);
+        super();
+        this.setArgs(args);
     }
-    GlobalOptions.receptiveFieldWidth = getReceptiveFieldWidth();
-    GlobalOptions.receptiveFieldHeight = getReceptiveFieldHeight();
-    if (getMarioEgoPosCol() == 9 && GlobalOptions.receptiveFieldWidth != 19)
-        GlobalOptions.marioEgoCol = GlobalOptions.receptiveFieldWidth / 2;
-    else
-        GlobalOptions.marioEgoCol = getMarioEgoPosCol();
-    if (getMarioEgoPosRow() == 9 && GlobalOptions.receptiveFieldHeight != 19)
-        GlobalOptions.marioEgoRow = GlobalOptions.receptiveFieldHeight / 2;
-    else
-        GlobalOptions.marioEgoRow = getMarioEgoPosRow();
 
-    GlobalOptions.VISUAL_COMPONENT_HEIGHT = getViewHeight();
-    GlobalOptions.VISUAL_COMPONENT_WIDTH = getViewWidth();
-//        Environment.ObsWidth = GlobalOptions.receptiveFieldWidth/2;
-//        Environment.ObsHeight = GlobalOptions.receptiveFieldHeight/2;
-    GlobalOptions.isShowReceptiveField = isReceptiveFieldVisualized();
-    GlobalOptions.isGameplayStopped = isStopGamePlay();
-}
+    //    @Deprecated
 
-public float getMarioGravity()
-{
-    // TODO: getMarioGravity, doublecheck if unit test is present and remove if fixed
-    return f(getParameterValue("-mgr"));
-}
+    public MarioAIOptions(String args)
+    {
+        //USE MarioAIOptions.getCmdLineOptionsClassByString(String args) method
+        super();
+        this.setArgs(args);
+    }
 
-public void setMarioGravity(float mgr)
-{
-   setParameterValue("-mgr", s(mgr));
-}
+    public MarioAIOptions()
+    {
+        super();
+        this.setArgs("");
+    }
 
-public float getWind()
-{
-    return f(getParameterValue("-w"));
-}
-
-public void setWind(float wind)
-{
-    setParameterValue("-w", s(wind));
-}
-
-public float getIce()
-{
-    return f(getParameterValue("-ice"));
-}
-
-public void setIce(float ice)
-{
-    setParameterValue("-ice", s(ice));
-}
-
-public float getCreaturesGravity()
-{
-    // TODO: getCreaturesGravity, same as for mgr
-    return f(getParameterValue("-cgr"));
-}
-
-public int getViewWidth()
-{
-    return i(getParameterValue("-vw"));
-}
-
-public void setViewWidth(int width)
-{
-    setParameterValue("-vw", s(width));
-}
-
-public int getViewHeight()
-{
-    return i(getParameterValue("-vh"));
-}
-
-public void setViewHeight(int height)
-{
-    setParameterValue("-vh", s(height));
-}
-
-public void printOptions(boolean singleLine)
-{
-    System.out.println("\n[MarioAI] : Options have been set to:");
-    for (Map.Entry<String, String> el : optionsHashMap.entrySet())
-        if (singleLine)
-            System.out.print(el.getKey() + " " + el.getValue() + " ");
+    public void setArgs(String argString)
+    {
+        if (!"".equals(argString))
+        {
+            this.setArgs(argString.trim().split("\\s+"));
+        }
         else
-            System.out.println(el.getKey() + " " + el.getValue() + " ");
-}
-
-public static MarioAIOptions getOptionsByString(String argString)
-{
-    // TODO: verify validity of this method, add unit tests
-    if (CmdLineOptionsMapString.get(argString) == null)
-    {
-        final MarioAIOptions value = new MarioAIOptions(argString.trim().split("\\s+"));
-        CmdLineOptionsMapString.put(argString, value);
-        return value;
+        {
+            this.setArgs((String[]) null);
+        }
     }
-    return CmdLineOptionsMapString.get(argString);
-}
 
-public static MarioAIOptions getDefaultOptions()
-{
-    return getOptionsByString("");
-}
+    public String asString()
+    {
+        return optionsAsString;
+    }
 
-public boolean isToolsConfigurator()
-{
-    return b(getParameterValue("-tc"));
-}
+    public void setArgs(String[] args)
+    {
+        //        if (args.length > 0 && !args[0].startsWith("-") /*starts with a path to agent then*/)
+        //        {
+        //            this.setAgent(args[0]);
+        //
+        //            String[] shiftedargs = new String[args.length - 1];
+        //            System.arraycopy(args, 1, shiftedargs, 0, args.length - 1);
+        //            this.setUpOptions(shiftedargs);
+        //        }
+        //        else
+        if (args != null)
+        {
+            for (String s : args)
+            {
+                optionsAsString += s + " ";
+            }
+        }
 
-public boolean isGameViewer()
-{
-    return b(getParameterValue("-gv"));
-}
+        this.setUpOptions(args);
 
-public void setGameViewer(boolean gv)
-{
-  setParameterValue("-gv", s(gv));
-}
+        if (isEcho())
+        {
+            this.printOptions(false);
+        }
+        GlobalOptions.receptiveFieldWidth = getReceptiveFieldWidth();
+        GlobalOptions.receptiveFieldHeight = getReceptiveFieldHeight();
+        if (getMarioEgoPosCol() == 9 && GlobalOptions.receptiveFieldWidth != 19)
+        {
+            GlobalOptions.marioEgoCol = GlobalOptions.receptiveFieldWidth / 2;
+        }
+        else
+        {
+            GlobalOptions.marioEgoCol = getMarioEgoPosCol();
+        }
+        if (getMarioEgoPosRow() == 9 && GlobalOptions.receptiveFieldHeight != 19)
+        {
+            GlobalOptions.marioEgoRow = GlobalOptions.receptiveFieldHeight / 2;
+        }
+        else
+        {
+            GlobalOptions.marioEgoRow = getMarioEgoPosRow();
+        }
 
-public boolean isGameViewerContinuousUpdates()
-{
-    return b(getParameterValue("-gvc"));
-}
+        GlobalOptions.VISUAL_COMPONENT_HEIGHT = getViewHeight();
+        GlobalOptions.VISUAL_COMPONENT_WIDTH = getViewWidth();
+        //        Environment.ObsWidth = GlobalOptions.receptiveFieldWidth/2;
+        //        Environment.ObsHeight = GlobalOptions.receptiveFieldHeight/2;
+        GlobalOptions.isShowReceptiveField = isReceptiveFieldVisualized();
+        GlobalOptions.isGameplayStopped = isStopGamePlay();
+    }
 
-public void setGameViewerContinuousUpdates(boolean gvc)
-{
-    setParameterValue("-gvc", s(gvc));
-}
+    public float getMarioGravity()
+    {
+        // TODO: getMarioGravity, doublecheck if unit test is present and remove if fixed
+        return f(getParameterValue("-mgr"));
+    }
 
-public boolean isEcho()
-{
-    return b(getParameterValue("-echo"));
-}
+    public void setMarioGravity(float mgr)
+    {
+        setParameterValue("-mgr", s(mgr));
+    }
 
-public void setEcho(boolean echo)
-{
-    setParameterValue("-echo", s(echo));
-}
+    public float getWind()
+    {
+        return f(getParameterValue("-w"));
+    }
 
-public boolean isStopGamePlay()
-{
-    return b(getParameterValue("-stop"));
-}
+    public void setWind(float wind)
+    {
+        setParameterValue("-w", s(wind));
+    }
 
-public void setStopGamePlay(boolean stop)
-{
-    setParameterValue("-stop", s(stop));
-}
+    public float getIce()
+    {
+        return f(getParameterValue("-ice"));
+    }
 
-public float getJumpPower()
-{
-    return f(getParameterValue("-jp"));
-}
+    public void setIce(float ice)
+    {
+        setParameterValue("-ice", s(ice));
+    }
 
-public void setJumpPower(float jp)
-{
-    setParameterValue("-jp", s(jp));
-}
+    public float getCreaturesGravity()
+    {
+        // TODO: getCreaturesGravity, same as for mgr
+        return f(getParameterValue("-cgr"));
+    }
 
-public int getReceptiveFieldWidth()
-{
-    int ret = i(getParameterValue("-rfw"));
-//
-//    if (ret % 2 == 0)
-//    {
-//        System.err.println("\n[MarioAI WARNING] : Wrong value for receptive field width: " + ret++ +
-//                " ; receptive field width set to " + ret);
-//        setParameterValue("-rfw", s(ret));
-//    }
-    return ret;
-}
+    public int getViewWidth()
+    {
+        return i(getParameterValue("-vw"));
+    }
 
-public void setReceptiveFieldWidth(int rfw)
-{
-    setParameterValue("-rfw", s(rfw));
-}
+    public void setViewWidth(int width)
+    {
+        setParameterValue("-vw", s(width));
+    }
 
-public int getReceptiveFieldHeight()
-{
-    int ret = i(getParameterValue("-rfh"));
-//    if (ret % 2 == 0)
-//    {
-//        System.err.println("\n[MarioAI WARNING] : Wrong value for receptive field height: " + ret++ +
-//                " ; receptive field height set to " + ret);
-//        setParameterValue("-rfh", s(ret));
-//    }
-    return ret;
-}
+    public int getViewHeight()
+    {
+        return i(getParameterValue("-vh"));
+    }
 
-public void setReceptiveFieldHeight(int rfh)
-{
-    setParameterValue("-rfh", s(rfh));
-}
+    public void setViewHeight(int height)
+    {
+        setParameterValue("-vh", s(height));
+    }
 
-public boolean isReceptiveFieldVisualized()
-{
-    return b(getParameterValue("-srf"));
-}
+    public void printOptions(boolean singleLine)
+    {
+        System.out.println("\n[MarioAI] : Options have been set to:");
+        for (Map.Entry<String, String> el : optionsHashMap.entrySet())
+        {
+            if (singleLine)
+            {
+                System.out.print(el.getKey() + " " + el.getValue() + " ");
+            }
+            else
+            {
+                System.out.println(el.getKey() + " " + el.getValue() + " ");
+            }
+        }
+    }
 
-public void setReceptiveFieldVisualized(boolean srf)
-{
-    setParameterValue("-srf", s(srf));
-}
+    public static MarioAIOptions getOptionsByString(String argString)
+    {
+        // TODO: verify validity of this method, add unit tests
+        if (CmdLineOptionsMapString.get(argString) == null)
+        {
+            final MarioAIOptions value = new MarioAIOptions(argString.trim().split("\\s+"));
+            CmdLineOptionsMapString.put(argString, value);
+            return value;
+        }
+        return CmdLineOptionsMapString.get(argString);
+    }
 
-public Point getMarioInitialPos()
-{
-    marioInitialPos.x = i(getParameterValue("-mix"));
-    marioInitialPos.y = i(getParameterValue("-miy"));
-    return marioInitialPos;
-}
+    public static MarioAIOptions getDefaultOptions()
+    {
+        return getOptionsByString("");
+    }
 
-public void reset()
-{
-    optionsHashMap.clear();
-}
+    public boolean isToolsConfigurator()
+    {
+        return b(getParameterValue("-tc"));
+    }
 
-public int getMarioEgoPosRow()
-{
-    return i(getParameterValue("-mer"));
-}
+    public boolean isGameViewer()
+    {
+        return b(getParameterValue("-gv"));
+    }
 
-public int getMarioEgoPosCol()
-{
-    return i(getParameterValue("-mec"));
-}
+    public void setGameViewer(boolean gv)
+    {
+        setParameterValue("-gv", s(gv));
+    }
 
-public int getExitX()
-{
-    return i(getParameterValue("-ex"));
-}
+    public boolean isGameViewerContinuousUpdates()
+    {
+        return b(getParameterValue("-gvc"));
+    }
 
-public int getExitY()
-{
-    return i(getParameterValue("-ey"));
-}
+    public void setGameViewerContinuousUpdates(boolean gvc)
+    {
+        setParameterValue("-gvc", s(gvc));
+    }
 
-public void setExitX(int x)
-{
-    setParameterValue("-ex", s(x));
-}
+    public boolean isEcho()
+    {
+        return b(getParameterValue("-echo"));
+    }
 
-public void setExitY(int y)
-{
-    setParameterValue("-ey", s(y));
-}
+    public void setEcho(boolean echo)
+    {
+        setParameterValue("-echo", s(echo));
+    }
+
+    public boolean isStopGamePlay()
+    {
+        return b(getParameterValue("-stop"));
+    }
+
+    public void setStopGamePlay(boolean stop)
+    {
+        setParameterValue("-stop", s(stop));
+    }
+
+    public float getJumpPower()
+    {
+        return f(getParameterValue("-jp"));
+    }
+
+    public void setJumpPower(float jp)
+    {
+        setParameterValue("-jp", s(jp));
+    }
+
+    public int getReceptiveFieldWidth()
+    {
+        int ret = i(getParameterValue("-rfw"));
+        //
+        //    if (ret % 2 == 0)
+        //    {
+        //        System.err.println("\n[MarioAI WARNING] : Wrong value for receptive field width: " + ret++ +
+        //                " ; receptive field width set to " + ret);
+        //        setParameterValue("-rfw", s(ret));
+        //    }
+        return ret;
+    }
+
+    public void setReceptiveFieldWidth(int rfw)
+    {
+        setParameterValue("-rfw", s(rfw));
+    }
+
+    public int getReceptiveFieldHeight()
+    {
+        int ret = i(getParameterValue("-rfh"));
+        //    if (ret % 2 == 0)
+        //    {
+        //        System.err.println("\n[MarioAI WARNING] : Wrong value for receptive field height: " + ret++ +
+        //                " ; receptive field height set to " + ret);
+        //        setParameterValue("-rfh", s(ret));
+        //    }
+        return ret;
+    }
+
+    public void setReceptiveFieldHeight(int rfh)
+    {
+        setParameterValue("-rfh", s(rfh));
+    }
+
+    public boolean isReceptiveFieldVisualized()
+    {
+        return b(getParameterValue("-srf"));
+    }
+
+    public void setReceptiveFieldVisualized(boolean srf)
+    {
+        setParameterValue("-srf", s(srf));
+    }
+
+    public Point getMarioInitialPos()
+    {
+        marioInitialPos.x = i(getParameterValue("-mix"));
+        marioInitialPos.y = i(getParameterValue("-miy"));
+        return marioInitialPos;
+    }
+
+    public void reset()
+    {
+        optionsHashMap.clear();
+    }
+
+    public int getMarioEgoPosRow()
+    {
+        return i(getParameterValue("-mer"));
+    }
+
+    public int getMarioEgoPosCol()
+    {
+        return i(getParameterValue("-mec"));
+    }
+
+    public int getExitX()
+    {
+        return i(getParameterValue("-ex"));
+    }
+
+    public int getExitY()
+    {
+        return i(getParameterValue("-ey"));
+    }
+
+    public void setExitX(int x)
+    {
+        setParameterValue("-ex", s(x));
+    }
+
+    public void setExitY(int y)
+    {
+        setParameterValue("-ey", s(y));
+    }
 }

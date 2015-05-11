@@ -42,57 +42,63 @@ import java.io.IOException;
  */
 public class ReplayAgent implements Agent
 {
-private Replayer replayer;
-private String name;
+
+    private Replayer replayer;
+    private String name;
 
 
-public ReplayAgent(String name)
-{
-    setName("Replay<" + name + ">");
-}
-
-//this method should return mario state and position array
-//byte[] TODO: fix comment
-
-public void setReplayer(Replayer replayer)
-{
-    this.replayer = replayer;
-}
-
-public boolean[] getAction()
-{
-    //handle the "Out of time" case
-    boolean[] action = null;
-    try
+    public ReplayAgent(String name)
     {
-        action = replayer.readAction();
-    } catch (IOException e)
-    {
-        System.err.println("[Mario AI Exception] : ReplayAgent is not able to read next action");
-        e.printStackTrace();
+        setName("Replay<" + name + ">");
     }
-    return action;
-}
 
-public void integrateObservation(final Environment environment)
-{}
+    //this method should return mario state and position array
+    //byte[] TODO: fix comment
 
-public void giveIntermediateReward(final float intermediateReward)
-{}
+    public void setReplayer(Replayer replayer)
+    {
+        this.replayer = replayer;
+    }
 
-public void reset()
-{}
+    public boolean[] getAction()
+    {
+        //handle the "Out of time" case
+        boolean[] action = null;
+        try
+        {
+            action = replayer.readAction();
+        }
+        catch (IOException e)
+        {
+            System.err.println("[Mario AI Exception] : ReplayAgent is not able to read next action");
+            e.printStackTrace();
+        }
+        return action;
+    }
 
-public void setObservationDetails(final int rfWidth, final int rfHeight, final int egoRow, final int egoCol)
-{}
+    public void integrateObservation(final Environment environment)
+    {
+    }
 
-public String getName()
-{
-    return name;
-}
+    public void giveIntermediateReward(final float intermediateReward)
+    {
+    }
 
-public void setName(final String name)
-{
-    this.name = name;
-}
+    public void reset()
+    {
+    }
+
+    public void setObservationDetails(final int rfWidth, final int rfHeight, final int egoRow, final int egoCol)
+    {
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(final String name)
+    {
+        this.name = name;
+    }
 }

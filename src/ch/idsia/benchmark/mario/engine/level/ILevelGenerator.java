@@ -36,9 +36,10 @@ package ch.idsia.benchmark.mario.engine.level;
  */
 public interface ILevelGenerator
 {
-public Level generateLevel();
 
-public int[] giveLevelComponents();
+    public Level generateLevel();
 
-public void buildLevelPart();
+    public int[] giveLevelComponents();
+
+    public void buildLevelPart();
 }

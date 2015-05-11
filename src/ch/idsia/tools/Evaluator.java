@@ -43,214 +43,217 @@ import java.util.List;
 
 public class Evaluator implements Runnable
 {
-Thread thisThread = null;
-//    EvaluationOptions evaluationOptions;
 
-private List<EvaluationInfo> evaluationSummary = new ArrayList<EvaluationInfo>();
+    Thread thisThread = null;
+    //    EvaluationOptions evaluationOptions;
 
-//    private void evaluateServerMode()
-//    {
-//        Server server = new Server(evaluationOptions.getServerAgentPort(), Environment.numberOfObservationElements, Environment.numberOfKeys);
-//        evaluationOptions.setAgent(new ServerAgent(server));
-//
-//        Simulation simulator = new BasicSimulator(evaluationOptions.getSimulationOptionsCopy());
-//        while (server.isRunning())
-//        {
-//            String resetData = server.recvUnSafe();
-//            if (resetData.startsWith("ciao"))
-//            {
-//                System.out.println("Evaluator: ciao received from client; restarting server");
-//                server.restartServer();
-//                continue;
-//            }
-//            if (resetData.startsWith("reset"))
-//            {
-//                resetData = resetData.split("reset\\s*")[1];
-//                evaluationOptions.setUpOptions(resetData.split("[\\s]+"));
-//                init(evaluationOptions);
-//                // Simulate One Level
-//                EvaluationInfo evaluationInfo;
-//
-//                long startTime = System.currentTimeMillis();
-//                String startMessage = "Evaluation started at " + GlobalOptions.getDateTime(null);
-////                LOGGER.println(startMessage, LOGGER.VERBOSE_MODE.ALL);
-//
-//                simulator.setSimulationOptions(evaluationOptions);
-//                evaluationInfo = simulator.simulateOneLevel();
-//
-//                evaluationInfo.levelType = evaluationOptions.getLevelType();
-//                evaluationInfo.levelDifficulty = evaluationOptions.getLevelDifficulty();
-//                evaluationInfo.levelRandSeed = evaluationOptions.getLevelRandSeed();
-//                evaluationSummary.add(evaluationInfo);
-////                LOGGER.VERBOSE_MODE VM = (evaluationInfo.marioStatus == Mario.STATUS_WIN) ? LOGGER.VERBOSE_MODE.INFO : LOGGER.VERBOSE_MODE.ALL;
-////                LOGGER.println("run finished with result : " + evaluationInfo, VM);
-//
-//                String fileName = "";
-//                if (!this.evaluationOptions.getMatlabFileName().equals(""))
-//                    fileName = exportToMatLabFile();
-//                Collections.sort(evaluationSummary, new evBasicFitnessComparator());
-//
-////                LOGGER.println("Entire Evaluation Finished with results:", LOGGER.VERBOSE_MODE.ALL);
-////                for (EvaluationInfo ev : evaluationSummary)
-////                {
-////                    LOGGER.println(ev.toString(), LOGGER.VERBOSE_MODE.ALL);
-////                }
-//                long currentTime = System.currentTimeMillis();
-//                long elapsed = currentTime - startTime;
-////                LOGGER.println(startMessage, LOGGER.VERBOSE_MODE.ALL);
-////                LOGGER.println("Evaluation Finished at " + GlobalOptions.getDateTime(null), LOGGER.VERBOSE_MODE.ALL);
-////                LOGGER.println("Total Evaluation Duration (HH:mm:ss:ms) " + GlobalOptions.getDateTime(elapsed), LOGGER.VERBOSE_MODE.ALL);
-////                if (!fileName.equals(""))
-////                    LOGGER.println("Exported to " + fileName, LOGGER.VERBOSE_MODE.ALL);
-////                return evaluationSummary;
-//            }
-//            else
-//            {
-//                System.err.println("Evaluator: Message <" + resetData + "> is incorrect client behavior. Exiting evaluation...");
-//                server.restartServer();
-//            }
-//        }
-//    }
+    private List<EvaluationInfo> evaluationSummary = new ArrayList<EvaluationInfo>();
 
-public List<EvaluationInfo> evaluate()
-{
-//        if (this.evaluationOptions.isServerMode() )
-//        {
-//            this.evaluateServerMode();
-//            return null;
-//        }
+    //    private void evaluateServerMode()
+    //    {
+    //        Server server = new Server(evaluationOptions.getServerAgentPort(), Environment.numberOfObservationElements, Environment.numberOfKeys);
+    //        evaluationOptions.setAgent(new ServerAgent(server));
+    //
+    //        Simulation simulator = new BasicSimulator(evaluationOptions.getSimulationOptionsCopy());
+    //        while (server.isRunning())
+    //        {
+    //            String resetData = server.recvUnSafe();
+    //            if (resetData.startsWith("ciao"))
+    //            {
+    //                System.out.println("Evaluator: ciao received from client; restarting server");
+    //                server.restartServer();
+    //                continue;
+    //            }
+    //            if (resetData.startsWith("reset"))
+    //            {
+    //                resetData = resetData.split("reset\\s*")[1];
+    //                evaluationOptions.setUpOptions(resetData.split("[\\s]+"));
+    //                init(evaluationOptions);
+    //                // Simulate One Level
+    //                EvaluationInfo evaluationInfo;
+    //
+    //                long startTime = System.currentTimeMillis();
+    //                String startMessage = "Evaluation started at " + GlobalOptions.getDateTime(null);
+    ////                LOGGER.println(startMessage, LOGGER.VERBOSE_MODE.ALL);
+    //
+    //                simulator.setSimulationOptions(evaluationOptions);
+    //                evaluationInfo = simulator.simulateOneLevel();
+    //
+    //                evaluationInfo.levelType = evaluationOptions.getLevelType();
+    //                evaluationInfo.levelDifficulty = evaluationOptions.getLevelDifficulty();
+    //                evaluationInfo.levelRandSeed = evaluationOptions.getLevelRandSeed();
+    //                evaluationSummary.add(evaluationInfo);
+    ////                LOGGER.VERBOSE_MODE VM = (evaluationInfo.marioStatus == Mario.STATUS_WIN) ? LOGGER.VERBOSE_MODE.INFO : LOGGER.VERBOSE_MODE.ALL;
+    ////                LOGGER.println("run finished with result : " + evaluationInfo, VM);
+    //
+    //                String fileName = "";
+    //                if (!this.evaluationOptions.getMatlabFileName().equals(""))
+    //                    fileName = exportToMatLabFile();
+    //                Collections.sort(evaluationSummary, new evBasicFitnessComparator());
+    //
+    ////                LOGGER.println("Entire Evaluation Finished with results:", LOGGER.VERBOSE_MODE.ALL);
+    ////                for (EvaluationInfo ev : evaluationSummary)
+    ////                {
+    ////                    LOGGER.println(ev.toString(), LOGGER.VERBOSE_MODE.ALL);
+    ////                }
+    //                long currentTime = System.currentTimeMillis();
+    //                long elapsed = currentTime - startTime;
+    ////                LOGGER.println(startMessage, LOGGER.VERBOSE_MODE.ALL);
+    ////                LOGGER.println("Evaluation Finished at " + GlobalOptions.getDateTime(null), LOGGER.VERBOSE_MODE.ALL);
+    ////                LOGGER.println("Total Evaluation Duration (HH:mm:ss:ms) " + GlobalOptions.getDateTime(elapsed), LOGGER.VERBOSE_MODE.ALL);
+    ////                if (!fileName.equals(""))
+    ////                    LOGGER.println("Exported to " + fileName, LOGGER.VERBOSE_MODE.ALL);
+    ////                return evaluationSummary;
+    //            }
+    //            else
+    //            {
+    //                System.err.println("Evaluator: Message <" + resetData + "> is incorrect client behavior. Exiting evaluation...");
+    //                server.restartServer();
+    //            }
+    //        }
+    //    }
 
-//        Simulation simulator = new BasicSimulator(evaluationOptions.getSimulationOptionsCopy());
-    // Simulate One Level
+    public List<EvaluationInfo> evaluate()
+    {
+        //        if (this.evaluationOptions.isServerMode() )
+        //        {
+        //            this.evaluateServerMode();
+        //            return null;
+        //        }
 
-//        EvaluationInfo evaluationInfo;
+        //        Simulation simulator = new BasicSimulator(evaluationOptions.getSimulationOptionsCopy());
+        // Simulate One Level
 
-//        long startTime = System.currentTimeMillis();
-//        String startMessage = "Evaluation started at " + GlobalOptions.getDateTime(null);
-//        LOGGER.println(startMessage, LOGGER.VERBOSE_MODE.ALL);
-//            LOGGER.println("Attempts left: " + (evaluationOptions.getNumberOfTrials() - ++i ), LOGGER.VERBOSE_MODE.ALL);
-//            evaluationInfo = simulator.simulateOneLevel();
+        //        EvaluationInfo evaluationInfo;
 
-//            evaluationInfo.levelType = evaluationOptions.getLevelType();
-//            evaluationInfo.levelDifficulty = evaluationOptions.getLevelDifficulty();
-//            evaluationInfo.levelRandSeed = evaluationOptions.getLevelRandSeed();
-//            evaluationSummary.add(evaluationInfo);
-//            LOGGER.VERBOSE_MODE VM = (evaluationInfo.marioStatus == Mario.STATUS_WIN) ? LOGGER.VERBOSE_MODE.INFO : LOGGER.VERBOSE_MODE.ALL;
-//            LOGGER.println("run  finished with result : " + evaluationInfo, VM);
-//            continueCondition = !GlobalOptions.StopSimulationIfWin || !(evaluationInfo.marioStatus == Mario.STATUS_WIN);
+        //        long startTime = System.currentTimeMillis();
+        //        String startMessage = "Evaluation started at " + GlobalOptions.getDateTime(null);
+        //        LOGGER.println(startMessage, LOGGER.VERBOSE_MODE.ALL);
+        //            LOGGER.println("Attempts left: " + (evaluationOptions.getNumberOfTrials() - ++i ), LOGGER.VERBOSE_MODE.ALL);
+        //            evaluationInfo = simulator.simulateOneLevel();
 
-//        while ((evaluationOptions.getNumberOfTrials() > i || evaluationOptions.getNumberOfTrials() == -1 ) && continueCondition);
+        //            evaluationInfo.levelType = evaluationOptions.getLevelType();
+        //            evaluationInfo.levelDifficulty = evaluationOptions.getLevelDifficulty();
+        //            evaluationInfo.levelRandSeed = evaluationOptions.getLevelRandSeed();
+        //            evaluationSummary.add(evaluationInfo);
+        //            LOGGER.VERBOSE_MODE VM = (evaluationInfo.marioStatus == Mario.STATUS_WIN) ? LOGGER.VERBOSE_MODE.INFO : LOGGER.VERBOSE_MODE.ALL;
+        //            LOGGER.println("run  finished with result : " + evaluationInfo, VM);
+        //            continueCondition = !GlobalOptions.StopSimulationIfWin || !(evaluationInfo.marioStatus == Mario.STATUS_WIN);
 
-//        String fileName = "";
-//        if (!this.evaluationOptions.getMatlabFileName().equals(""))
-//           fileName = exportToMatLabFile();
-//        Collections.sort(evaluationSummary, new evBasicFitnessComparator());
+        //        while ((evaluationOptions.getNumberOfTrials() > i || evaluationOptions.getNumberOfTrials() == -1 ) && continueCondition);
 
-//        LOGGER.println("Entire Evaluation Finished with results:", LOGGER.VERBOSE_MODE.ALL);
-//        for (EvaluationInfo ev : evaluationSummary)
-//        {
-//             LOGGER.println(ev.toString(), LOGGER.VERBOSE_MODE.ALL);
-//        }
-//        long currentTime = System.currentTimeMillis();
-//        long elapsed = currentTime - startTime;
-//        LOGGER.println(startMessage, LOGGER.VERBOSE_MODE.ALL);
-//        LOGGER.println("Evaluation Finished at " + GlobalOptions.getDateTime(null), LOGGER.VERBOSE_MODE.ALL);
-//        LOGGER.println("Total Evaluation Duration (HH:mm:ss:ms) " + GlobalOptions.getDateTime(elapsed), LOGGER.VERBOSE_MODE.ALL);
-//        if (!fileName.equals(""))
-//            LOGGER.println("Exported to " + fileName, LOGGER.VERBOSE_MODE.ALL);
-    return evaluationSummary;
-}
+        //        String fileName = "";
+        //        if (!this.evaluationOptions.getMatlabFileName().equals(""))
+        //           fileName = exportToMatLabFile();
+        //        Collections.sort(evaluationSummary, new evBasicFitnessComparator());
 
-//    public void verbose(String message, LOGGER.VERBOSE_MODE verbose_mode)
-//    {
-//        LOGGER.println(message, verbose_mode);
-//    }
+        //        LOGGER.println("Entire Evaluation Finished with results:", LOGGER.VERBOSE_MODE.ALL);
+        //        for (EvaluationInfo ev : evaluationSummary)
+        //        {
+        //             LOGGER.println(ev.toString(), LOGGER.VERBOSE_MODE.ALL);
+        //        }
+        //        long currentTime = System.currentTimeMillis();
+        //        long elapsed = currentTime - startTime;
+        //        LOGGER.println(startMessage, LOGGER.VERBOSE_MODE.ALL);
+        //        LOGGER.println("Evaluation Finished at " + GlobalOptions.getDateTime(null), LOGGER.VERBOSE_MODE.ALL);
+        //        LOGGER.println("Total Evaluation Duration (HH:mm:ss:ms) " + GlobalOptions.getDateTime(elapsed), LOGGER.VERBOSE_MODE.ALL);
+        //        if (!fileName.equals(""))
+        //            LOGGER.println("Exported to " + fileName, LOGGER.VERBOSE_MODE.ALL);
+        return evaluationSummary;
+    }
 
-public String getMeanEvaluationSummary()
-{
-//            TODO:TASK:[M] time per level\    mean time per level
-    //TODO:TASK:[M] getMeanEvaluationSummary, compute mean, standard deviation of each component of a summary
-    return "\nEvaluation Summary:\n...\nEnd of Evaluation Summary\n";
-}
+    //    public void verbose(String message, LOGGER.VERBOSE_MODE verbose_mode)
+    //    {
+    //        LOGGER.println(message, verbose_mode);
+    //    }
 
-//    public String exportToMatLabFile()
-//    {
-//        FileOutputStream fos;
-//        String fileName = this.evaluationOptions.getMatlabFileName() + ".m";
-//        try {
-//
-//            fos = new FileOutputStream(fileName);
-//            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-//            bw.newLine();
-//            bw.write("%% " + this.evaluationOptions.getAgent().getName());
-//            bw.newLine();
-//            bw.write("% BasicFitness ");
-//            bw.newLine();
-//            bw.write("Attempts = [1:" + evaluationSummary.size() + "];");
-//            bw.newLine();
-//            bw.write("% BasicFitness ");
-//            bw.newLine();
-//            bw.write("BasicFitness = [");
-//            for (EvaluationInfo ev : evaluationSummary)
-//                bw.write(String.valueOf(ev.computeBasicFitness()) + " ");
-//            bw.write("];");
-//            bw.newLine();
-//            bw.write("plot(Attempts,BasicFitness, '.')");
-//            bw.close();
-//            return fileName;
-//        }
-//        catch (FileNotFoundException e)  {  e.printStackTrace(); return "Null" ;       }
-//        catch (IOException e) {     e.printStackTrace();  return "Null";      }
-//    }
+    public String getMeanEvaluationSummary()
+    {
+        //            TODO:TASK:[M] time per level\    mean time per level
+        //TODO:TASK:[M] getMeanEvaluationSummary, compute mean, standard deviation of each component of a summary
+        return "\nEvaluation Summary:\n...\nEnd of Evaluation Summary\n";
+    }
 
-//    public void exportToPyPlot(String fileName)
-//    {
-//        //TODO:TASK:[M] create a plot.py, that if python plot.py produces a diagram and saves it to pdf 
-//    }
+    //    public String exportToMatLabFile()
+    //    {
+    //        FileOutputStream fos;
+    //        String fileName = this.evaluationOptions.getMatlabFileName() + ".m";
+    //        try {
+    //
+    //            fos = new FileOutputStream(fileName);
+    //            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+    //            bw.newLine();
+    //            bw.write("%% " + this.evaluationOptions.getAgent().getName());
+    //            bw.newLine();
+    //            bw.write("% BasicFitness ");
+    //            bw.newLine();
+    //            bw.write("Attempts = [1:" + evaluationSummary.size() + "];");
+    //            bw.newLine();
+    //            bw.write("% BasicFitness ");
+    //            bw.newLine();
+    //            bw.write("BasicFitness = [");
+    //            for (EvaluationInfo ev : evaluationSummary)
+    //                bw.write(String.valueOf(ev.computeBasicFitness()) + " ");
+    //            bw.write("];");
+    //            bw.newLine();
+    //            bw.write("plot(Attempts,BasicFitness, '.')");
+    //            bw.close();
+    //            return fileName;
+    //        }
+    //        catch (FileNotFoundException e)  {  e.printStackTrace(); return "Null" ;       }
+    //        catch (IOException e) {     e.printStackTrace();  return "Null";      }
+    //    }
 
-//    public void exportToMathematicaNotebookFile(String fileName)
-//    {
-//        //TODO:TASK:|L|
-//    }
+    //    public void exportToPyPlot(String fileName)
+    //    {
+    //        //TODO:TASK:[M] create a plot.py, that if python plot.py produces a diagram and saves it to pdf
+    //    }
 
-public void reset()
-{
-    evaluationSummary = new ArrayList<EvaluationInfo>();
-}
+    //    public void exportToMathematicaNotebookFile(String fileName)
+    //    {
+    //        //TODO:TASK:|L|
+    //    }
 
-//    public Evaluator(EvaluationOptions evaluationOptions)
-//    {
-////        init(evaluationOptions);
-//    }
+    public void reset()
+    {
+        evaluationSummary = new ArrayList<EvaluationInfo>();
+    }
 
-public void run()
-{
-    evaluate();
-}
+    //    public Evaluator(EvaluationOptions evaluationOptions)
+    //    {
+    ////        init(evaluationOptions);
+    //    }
 
-public void start()
-{
-    if (thisThread.getState() == Thread.State.NEW)
-        thisThread.start();
-}
+    public void run()
+    {
+        evaluate();
+    }
 
-//    public void init(EvaluationOptions evaluationOptions)
-//    {
-//
-////        if (evaluationOptions.isVisualization())
-////        {
-////            ToolsConfigurator.CreateMarioComponentFrame(
-////                    evaluationOptions);
-////        }
-////        else
-////        {
-////
-////        }
-////        GlobalOptions.isPauseWorld = evaluationOptions.isPauseWorld();
-////        this.evaluationOptions = evaluationOptions;
-////        if (thisThread == null)
-////            thisThread = new Thread(this);
-//    }
+    public void start()
+    {
+        if (thisThread.getState() == Thread.State.NEW)
+        {
+            thisThread.start();
+        }
+    }
+
+    //    public void init(EvaluationOptions evaluationOptions)
+    //    {
+    //
+    ////        if (evaluationOptions.isVisualization())
+    ////        {
+    ////            ToolsConfigurator.CreateMarioComponentFrame(
+    ////                    evaluationOptions);
+    ////        }
+    ////        else
+    ////        {
+    ////
+    ////        }
+    ////        GlobalOptions.isPauseWorld = evaluationOptions.isPauseWorld();
+    ////        this.evaluationOptions = evaluationOptions;
+    ////        if (thisThread == null)
+    ////            thisThread = new Thread(this);
+    //    }
 }
 
 //class evBasicFitnessComparator implements Comparator

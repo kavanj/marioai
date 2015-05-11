@@ -36,5 +36,6 @@ package ch.idsia.utils;
  */
 public class ErrorCodes
 {
-public static final int FILE_NAME_OR_LOAD_PROBLEM = -3;
+
+    public static final int FILE_NAME_OR_LOAD_PROBLEM = -3;
 }

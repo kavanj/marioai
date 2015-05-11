@@ -38,21 +38,22 @@ import ch.idsia.benchmark.mario.environments.Environment;
  */
 public interface Agent
 {
-boolean[] getAction();
 
-void integrateObservation(Environment environment);
+    boolean[] getAction();
 
-void giveIntermediateReward(float intermediateReward);
+    void integrateObservation(Environment environment);
 
-/**
- * clears all dynamic data, such as hidden layers in recurrent networks
- * just implement an empty method for a reactive controller
- */
-public void reset();
+    void giveIntermediateReward(float intermediateReward);
 
-public void setObservationDetails(int rfWidth, int rfHeight, int egoRow, int egoCol);
+    /**
+     * clears all dynamic data, such as hidden layers in recurrent networks
+     * just implement an empty method for a reactive controller
+     */
+    public void reset();
 
-public String getName();
+    public void setObservationDetails(int rfWidth, int rfHeight, int egoRow, int egoCol);
 
-public void setName(String name);
+    public String getName();
+
+    public void setName(String name);
 }

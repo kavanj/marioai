@@ -38,45 +38,46 @@ import ch.idsia.agents.Agent;
 
 public class TimingAgent extends BasicMarioAIAgent implements Agent
 {
-private Agent agent;
-private long timeTaken = 0;
-private int actionsPerformed = 0;
 
-public TimingAgent(Agent agent)
-{
-    super("TimingAgent");
-    this.agent = agent;
-}
+    private Agent agent;
+    private long timeTaken = 0;
+    private int actionsPerformed = 0;
 
-public boolean[] getAction()
-{
-    long start = System.currentTimeMillis();
-    boolean[] action = agent.getAction();
-    timeTaken += (System.currentTimeMillis() - start);
-    actionsPerformed++;
-    return action;
-}
+    public TimingAgent(Agent agent)
+    {
+        super("TimingAgent");
+        this.agent = agent;
+    }
 
-public void reset()
-{
-    agent.reset();
-}
+    public boolean[] getAction()
+    {
+        long start = System.currentTimeMillis();
+        boolean[] action = agent.getAction();
+        timeTaken += (System.currentTimeMillis() - start);
+        actionsPerformed++;
+        return action;
+    }
 
-public String getName()
-{
-    return agent.getName();
-}
+    public void reset()
+    {
+        agent.reset();
+    }
 
-public void setName(String name)
-{
-    agent.setName(name);
-}
+    public String getName()
+    {
+        return agent.getName();
+    }
 
-public double averageTimeTaken()
-{
-    double average = ((double) timeTaken) / actionsPerformed;
-    timeTaken = 0;
-    actionsPerformed = 0;
-    return average;
-}
+    public void setName(String name)
+    {
+        agent.setName(name);
+    }
+
+    public double averageTimeTaken()
+    {
+        double average = ((double) timeTaken) / actionsPerformed;
+        timeTaken = 0;
+        actionsPerformed = 0;
+        return average;
+    }
 }
