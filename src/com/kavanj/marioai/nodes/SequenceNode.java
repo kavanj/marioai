@@ -4,11 +4,18 @@ package com.kavanj.marioai.nodes;
  * Created by joe on 2015-05-12.
  */
 
+import java.util.Collection;
+
 /**
  * A SequenceNode {@link Node} will iterate over each of it's subnodes until one returns false.
  */
 public class SequenceNode extends ControlFlowNode
 {
+
+    public SequenceNode(Collection<Node> nodes)
+    {
+        super(nodes);
+    }
 
     /**
      * Iterates over each of the {@link SequenceNode}'s subnodes until one returns false or it runs out of nodes.
