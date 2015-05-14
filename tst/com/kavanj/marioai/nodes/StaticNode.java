@@ -5,6 +5,9 @@ package com.kavanj.marioai.nodes;
  */
 public class StaticNode implements Node
 {
+    public static final StaticNode TRUE_NODE = new StaticNode(true);
+    public static final StaticNode FALSE_NODE = new StaticNode(false);
+
     private final boolean returnValue;
 
     public StaticNode(boolean returnValue)
