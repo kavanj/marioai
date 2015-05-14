@@ -51,7 +51,9 @@ public class Custom
     {
         //final String argsString = "-vis on";
         final MarioAIOptions marioAIOptions = new MarioAIOptions(args);
-        final Agent agent = new MarioAi();//new ForwardAgent();
+
+        final Agent agent = new MarioAi();
+
         final BasicTask basicTask = new BasicTask(marioAIOptions);
 
         marioAIOptions.setAgent(agent);

@@ -1,4 +1,6 @@
-package com.kavanj.marioai.nodes;
+package com.kavanj.marioai.nodes.control;
+
+import com.kavanj.marioai.nodes.Node;
 
 import java.util.ArrayList;
 import java.util.Arrays;

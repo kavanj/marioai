@@ -1,8 +1,10 @@
-package com.kavanj.marioai.nodes;
+package com.kavanj.marioai.nodes.control;
 
 /**
  * Created by joe on 2015-05-12.
  */
+
+import com.kavanj.marioai.nodes.Node;
 
 import java.util.Collection;
 
@@ -13,6 +15,11 @@ public class SequenceNode extends ControlFlowNode
 {
 
     public SequenceNode(Collection<Node> nodes)
+    {
+        super(nodes);
+    }
+
+    public SequenceNode(Node... nodes)
     {
         super(nodes);
     }
